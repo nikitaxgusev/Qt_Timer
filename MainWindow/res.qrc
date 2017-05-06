@@ -3,4 +3,7 @@
         <file>al.mp3</file>
         <file>tik.mp3</file>
     </qresource>
+    <qresource prefix="/Images">
+        <file>clock.png</file>
+    </qresource>
 </RCC>

@@ -1,5 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <QTimer>
+#include <QDateTime>
+#include<QLabel>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -7,10 +10,18 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    resize(400, 300);
+    resize(400, 350);
+    this->setFixedSize(this->geometry().width(),this->geometry().height());
 
-    this->setStyleSheet("background-color: #1E90FF");
-    /////////////////////////////////////////////////////////////
+    QTimer *timer=new QTimer(this);
+    connect(timer,SIGNAL(timeout()),this,SLOT(showClock()));
+    timer->start();
+    showClock();
+  ///////////////////////////////////////////////////////////////
+
+
+
+  /////////////////////////////////////////////////////////////
     yellow=new QRadioButton(this);
     yellow->setText("Yellow");
     yellow->setGeometry(QRect(120,270, 100, 20));
@@ -25,10 +36,11 @@ MainWindow::MainWindow(QWidget *parent) :
     black->setGeometry(QRect(230,270, 100, 20));
 
     ///////////////////////////////////////////////////////////////
-    blue->setChecked(true);
+   // blue->setChecked(true);
     connect(yellow,SIGNAL(clicked()),SLOT(yellow_clicked()));
     connect(blue,SIGNAL(clicked()),SLOT(blue_clicked()));
-     connect(black,SIGNAL(clicked()),SLOT(black_clicked()));
+    connect(black,SIGNAL(clicked()),SLOT(black_clicked()));
+    ///////////////////////////////////////////////////////////
     //button Timer
     QFont font = ui->pushButton->font();
     font.setPointSize(12);
@@ -91,3 +103,19 @@ void MainWindow::black_clicked()
   this->setStyleSheet("background-color: #808080");
   this->setFixedSize(this->geometry().width(),this->geometry().height());
 }
+void MainWindow::showClock()
+{
+    QTime time=QTime::currentTime();
+    QString time_text=time.toString("hh : mm : ss");
+    if((time.second()%2)==0)
+    {
+        time_text[3]=' ';
+    }
+    if((time.second()%2)!=0)
+    {
+        time_text[8]=' ';
+    }
+
+    ui->Digital_work->setText(time_text);
+}
+

@@ -54,7 +54,10 @@ TimerMainWindow::TimerMainWindow(QWidget *parent) :
        label_3->setFont(font_label_3);
 
       // label_3->setStyleSheet("background-color: #FFD700; color: rgb(255, 20, 0)");
-//////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+
+
+
        lblh = new QLabel(groupBox);
        lblh->setText("00");
        lblh->setGeometry(QRect(10, 30, 55, 55));
@@ -69,7 +72,7 @@ TimerMainWindow::TimerMainWindow(QWidget *parent) :
        QFont font_m = lblm->font();
        font_m.setPointSize(38);
        lblm->setFont(font_m);
-       //lblm->setStyleSheet(font_m);
+      // lblm->setStyleSheet(font_m);
       // lblm->setStyleSheet("background-color: #FFD700; color: rgb(255, 20, 0)");
 
        lbls = new QLabel(groupBox);
@@ -78,6 +81,21 @@ TimerMainWindow::TimerMainWindow(QWidget *parent) :
        QFont font_s = lbls->font();
        font_s.setPointSize(38);
        lbls->setFont(font_s);
+      // lbls->setStyleSheet(font_s);
+
+       points=new QLabel(groupBox);
+       points->setText(":");
+       points->setGeometry(QRect(65, 30, 15, 55));
+       QFont font_p=points->font();
+       font_p.setPointSize(38);
+       points->setFont(font_p);
+
+       points1=new QLabel(groupBox);
+       points1->setText(":");
+       points1->setGeometry(QRect(135, 30, 15, 55));
+       QFont font_p1=points1->font();
+       font_p1.setPointSize(38);
+       points1->setFont(font_p1);
      //  lbls->setStyleSheet("background-color: #FFD700; color: rgb(255, 20, 0)");
 
 ////////////////////////////////////////////////////////
@@ -165,6 +183,7 @@ TimerMainWindow::TimerMainWindow(QWidget *parent) :
 
            setWindowTitle("Smart Watch");
         //play playground music
+           al=new QMediaPlayer;
            music=new QMediaPlayer(this,  QMediaPlayer::StreamPlayback);
            QMediaPlaylist *playlist = new QMediaPlaylist;
            playlist->addMedia(QUrl("qrc:/sounds/tik.mp3"));
@@ -201,7 +220,6 @@ void  TimerMainWindow::timeOut()
         {
             stop_all_music();
             //play music playground for alarm
-
             al->setMedia(QUrl("qrc:/sounds/al.mp3"));
             al->play();
         }
@@ -232,7 +250,8 @@ void TimerMainWindow::on_pushButton_clicked_back()
 {
     this->hide();
     MainWindow *s =new MainWindow (this);
-  //  al->stop();
+    music->stop();
+   al->stop();
     s->show();
 
 }
@@ -246,13 +265,6 @@ void TimerMainWindow::start_all_music(void)
 }
 void TimerMainWindow::MusicFunction(void)
 {
-  //  if(r_on)
-   // {
-   //  music->play();
-   // }
-   //  else
-   // {
         connect(r_off,SIGNAL(clicked()),SLOT(stop_all_music()));
-        connect(r_on,SIGNAL(clicked()),SLOT(start_all_music()));
-  //  }
+       connect(r_on,SIGNAL(clicked()),SLOT(start_all_music()));
 }

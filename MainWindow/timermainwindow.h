@@ -40,6 +40,8 @@ public:
        QLabel *lblh;
        QLabel *lblm;
        QLabel *lbls;
+       QLabel *points;
+       QLabel *points1;
 
        QRadioButton *r_off;
        QRadioButton *r_on;

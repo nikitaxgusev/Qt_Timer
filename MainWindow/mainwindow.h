@@ -5,6 +5,8 @@
 #include <QLabel>
 #include <QRadioButton>
 #include <QMediaPlayer>
+#include <QTimer>
+#include <QDateTime>
 #include "timermainwindow.h"
 #include "stopmainwindow.h"
 
@@ -33,10 +35,11 @@ private slots:
     void yellow_clicked();
     void blue_clicked();
     void black_clicked();
+
+
+    void showClock();
 private:
     Ui::MainWindow *ui;
-   // TimerMainWindow *t;
-   // StopMainWindow *s;
 };
 
 #endif // MAINWINDOW_H

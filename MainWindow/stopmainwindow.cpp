@@ -13,6 +13,7 @@ StopMainWindow::StopMainWindow(QWidget *parent) :
     , mTotalTime(0)
 {
     resize(360, 250);
+    this->setFixedSize(this->geometry().width(),this->geometry().height());
 
     centralWidget = new QWidget(this);
 
@@ -117,6 +118,7 @@ StopMainWindow::StopMainWindow(QWidget *parent) :
           music->setPlaylist(playlist);
           music->setVolume(100);
 
+
         r_on->setChecked(true);
         mRunning = false;
         startTimer(0);
@@ -133,6 +135,7 @@ void StopMainWindow::start(void)
      pushButton_Stop->setEnabled(true);
      mStartTime = QDateTime::currentDateTime();
      mRunning = true;
+     r_on->setChecked(true);
      MusicFunction();
      mStartTime = QDateTime::currentDateTime();
      startTimer(1);
@@ -157,6 +160,7 @@ void StopMainWindow::pause(void)
     timerEvent(new QTimerEvent(0));
     mTotalTime += mSessionTime;
     mRunning = false;
+    //music->stop();
 }
 void StopMainWindow::timerEvent(QTimerEvent *)
 {
@@ -166,7 +170,7 @@ void StopMainWindow::timerEvent(QTimerEvent *)
 
         mSessionTime = mStartTime.msecsTo(QDateTime::currentDateTime());
           qint64 time = mTotalTime + mSessionTime;
-          time *= 65;
+          time *= 60;
 
           unsigned int h = time / 1000 / 60 / 60;
           unsigned int m = (time / 1000 / 60) - (h * 60);
@@ -186,6 +190,7 @@ void StopMainWindow::back(void)
 {
     this->hide();
     MainWindow *s =new MainWindow (this);
+    music->stop();
     s->show();
 }
 void StopMainWindow::stop_all_music(void)
